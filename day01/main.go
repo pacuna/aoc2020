@@ -14,7 +14,6 @@ func main() {
 	}
 	scanner := bufio.NewScanner(f)
 	s := []int{}
-	d := make(map[int]int)
 	for scanner.Scan() {
 		var x int
 		_, err := fmt.Sscanf(scanner.Text(), "%d", &x)
@@ -29,28 +28,38 @@ func main() {
 		}
 	}
 
-	// part I
+	fmt.Printf("partI sol: %d\n", partI(s))
+	fmt.Printf("partII sol: %d", partII(s))
+
+}
+
+// classic 2-sum target algorithm
+func partI(s []int) int {
+	var result int
+	d := make(map[int]int)
 	for i, el := range s {
 		d[el] = i
 	}
 
 	for k, _ := range d {
 		if val, ok := d[2020-k]; ok {
-			fmt.Println(k, s[val], k*s[val])
-			break
+			result = k * s[val]
 		}
 	}
+	return result
+}
 
-	// part II
+// brute force
+func partII(s []int) int {
+	var result int
 	for i := 0; i < len(s); i++ {
 		for j := 0; j < len(s); j++ {
 			for k := 0; k < len(s); k++ {
 				if s[i]+s[j]+s[k] == 2020 {
-					fmt.Println(s[i], s[j], s[k], s[i]*s[j]*s[k])
-					break
+					return s[i] * s[j] * s[k]
 				}
 			}
 		}
 	}
-
+	return result
 }
