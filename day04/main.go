@@ -24,8 +24,8 @@ func main() {
 			}
 			line = ""
 		} else {
-			line += " "
 			line += scanner.Text()
+			line += " "
 		}
 	}
 	if isValid(line) {
@@ -44,7 +44,6 @@ func isValid(data string) bool {
 		"hcl": true,
 		"ecl": true,
 		"pid": true,
-		"cid": true,
 	}
 	for _, field := range strings.Fields(data) {
 		fieldName := strings.Split(field, ":")[0]
@@ -52,5 +51,5 @@ func isValid(data string) bool {
 			delete(validFields, fieldName)
 		}
 	}
-	return len(validFields) == 0 || (len(validFields) == 1 && validFields["cid"])
+	return len(validFields) == 0
 }
