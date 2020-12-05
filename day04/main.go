@@ -12,6 +12,7 @@ import (
 
 func main() {
 	f, err := os.Open("input.txt")
+	defer f.Close()
 	if err != nil {
 		log.Fatal(err)
 	}
